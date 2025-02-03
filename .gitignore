@@ -37,9 +37,9 @@ migrate_working_dir/
 .build/
 .ios/
 .linux/
-.macos/
-.windows/
-.web/
+.macos
+.windows
+.web
 
 
 # Symbolication related
