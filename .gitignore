@@ -33,10 +33,10 @@ migrate_working_dir/
 .pub/
 /build/
 .idea
-.android/
-.build/
-.ios/
-.linux/
+.android
+.build
+.ios
+.linux
 .macos
 .windows
 .web
