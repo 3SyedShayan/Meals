@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/widgets/meal_item.dart';
 
 class Meals extends StatelessWidget {
   Meals({super.key, required this.title, required this.meals});
@@ -9,14 +10,11 @@ class Meals extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
       itemCount: meals.length,
-      itemBuilder: (context, index) => Card(
-        child: Column(
-          children: [
-            Text(meals[index].title),
-          ],
-        ),
+      itemBuilder: (context, index) => MealItem(
+        meal: meals[index],
       ),
     );
+
     if (meals.isEmpty) {
       content = Center(
         child: Text("No meals found, please check your filters!"),
