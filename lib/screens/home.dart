@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/category.dart';
+import 'package:meals/models/meal.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
-
+  Home({super.key, required this.onUpdateFavourites});
+  void Function(Meal meal) onUpdateFavourites;
   void onSelectCategory(BuildContext context, Category category) {
     final filteredMeals = dummyMeals
         .where((meal) => meal.categories.contains(category.id))
@@ -17,6 +18,7 @@ class Home extends StatelessWidget {
         builder: (context) => Meals(
           title: category.title,
           meals: filteredMeals,
+          onUpdateFavorites: onUpdateFavourites,
         ),
       ),
     );
@@ -24,27 +26,23 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Meals"),
+    return GridView(
+      padding: EdgeInsets.all(24),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 1.5,
+        crossAxisSpacing: 20,
+        mainAxisSpacing: 20,
       ),
-      body: GridView(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          childAspectRatio: 1.5,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-        ),
-        children: [
-          for (final category in availableCategories)
-            CategoryGrid(
-              category: category,
-              onSelectCategory: () {
-                onSelectCategory(context, category);
-              },
-            )
-        ],
-      ),
+      children: [
+        for (final category in availableCategories)
+          CategoryGrid(
+            category: category,
+            onSelectCategory: () {
+              onSelectCategory(context, category);
+            },
+          )
+      ],
     );
   }
 }

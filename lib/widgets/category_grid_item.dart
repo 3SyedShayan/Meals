@@ -14,12 +14,27 @@ class CategoryGrid extends StatelessWidget {
   void Function() onSelectCategory;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(15),
-      color: category.color,
-      child: InkWell(
-        child: Text(category.title),
-        onTap: onSelectCategory,
+    return InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: onSelectCategory,
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              category.color.withOpacity(0.55),
+              category.color.withOpacity(0.9),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        alignment: Alignment.center,
+        child: Text(
+          category.title,
+          style: TextStyle(color: Colors.white, fontSize: 17),
+        ),
       ),
     );
   }
