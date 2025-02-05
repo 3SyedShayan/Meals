@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/screens/home.dart';
 import 'package:meals/screens/meals.dart';
+import 'package:meals/widgets/main_drawer.dart';
 
 class TabScreen extends StatefulWidget {
   const TabScreen({super.key});
@@ -37,6 +38,14 @@ class _TabScreenState extends State<TabScreen> {
     }
   }
 
+  void onDrawerUpdate(String drawerText) {
+    if (drawerText == "filters") {
+      //
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
+
   void onUpdateTab(index) {
     setState(
       () {
@@ -57,6 +66,9 @@ class _TabScreenState extends State<TabScreen> {
       );
     }
     return Scaffold(
+      drawer: MainDrawer(
+        onDrawerSelection: onDrawerUpdate,
+      ),
       appBar: AppBar(
         title: currentIndex == 0 ? const Text('Home') : const Text('Favorites'),
       ),
