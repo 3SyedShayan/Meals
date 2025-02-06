@@ -6,10 +6,11 @@ import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key, required this.onUpdateFavourites});
+  Home({super.key, required this.onUpdateFavourites, required this.availableMeals});
   void Function(Meal meal) onUpdateFavourites;
+  List<Meal> availableMeals;
   void onSelectCategory(BuildContext context, Category category) {
-    final filteredMeals = dummyMeals
+    final filteredMeals = availableMeals
         .where((meal) => meal.categories.contains(category.id))
         .toList();
     Navigator.push(

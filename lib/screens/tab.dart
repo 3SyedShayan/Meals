@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meals/data/dummy_data.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/home.dart';
 import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/main_drawer.dart';
@@ -11,8 +13,16 @@ class TabScreen extends StatefulWidget {
   State<TabScreen> createState() => _TabScreenState();
 }
 
+const kInitialFilters = {
+  Filter.Gluten: false,
+  Filter.Lactose: false,
+  Filter.Vegan: false,
+  Filter.Vegetarian: false
+};
+
 class _TabScreenState extends State<TabScreen> {
   List<Meal> favMeals = [];
+  Map<Filter, bool> selectedMeals = kInitialFilters;
   int currentIndex = 0;
   void showSnacks(String message) {
     ScaffoldMessenger.of(context).clearSnackBars();
@@ -38,11 +48,19 @@ class _TabScreenState extends State<TabScreen> {
     }
   }
 
-  void onDrawerUpdate(String drawerText) {
+  void onDrawerUpdate(String drawerText) async {
+    Navigator.of(context).pop();
     if (drawerText == "filters") {
-      //
-    } else {
-      Navigator.of(context).pop();
+      var result = await Navigator.push<Map<Filter, bool>>(
+        context,
+        MaterialPageRoute(
+          builder: (context) => FiltersScreen(),
+        ),
+      );
+      setState(() {
+        selectedMeals = result ?? kInitialFilters;
+      });
+      print(result);
     }
   }
 
@@ -56,7 +74,23 @@ class _TabScreenState extends State<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final availableMeals = dummyMeals.where((meal) {
+      if (selectedMeals[Filter.Gluten]! && !meal.isGlutenFree) {
+        return false;
+      }
+      if (selectedMeals[Filter.Lactose]! && !meal.isLactoseFree) {
+        return false;
+      }
+      if (selectedMeals[Filter.Vegan]! && !meal.isVegan) {
+        return false;
+      }
+      if (selectedMeals[Filter.Vegetarian]! && !meal.isVegetarian) {
+        return false;
+      }
+      return true;
+    }).toList();
     Widget content = Home(
+      availableMeals: availableMeals,
       onUpdateFavourites: onUpdateFavourites,
     );
     if (currentIndex == 1) {
