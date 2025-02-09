@@ -32,9 +32,12 @@ class _FiltersScreenState extends State<FiltersScreen> {
       ),
       body: PopScope(
         canPop: false,
-        onPopInvokedWithResult: (bool didPop, dynamic result) {
-          print(didPop);
-          if (didPop) return;
+        onPopInvokedWithResult: (didPop, did) async {
+          // Make callback async
+          if (didPop) {
+     
+            return; 
+          }
           Navigator.of(context).pop({
             Filter.Gluten: _glutenFilter,
             Filter.Lactose: _lactoseFilter,

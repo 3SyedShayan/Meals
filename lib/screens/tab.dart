@@ -62,7 +62,6 @@ class _TabScreenState extends State<TabScreen> {
       setState(() {
         selectedMeals = result ?? kInitialFilters;
       });
-      print(result);
     }
   }
 
