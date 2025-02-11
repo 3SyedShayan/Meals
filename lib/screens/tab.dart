@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:meals/providers/favourites_provider.dart';
-import 'package:meals/providers/meals_provider.dart';
 import 'package:meals/screens/filters.dart';
 import 'package:meals/screens/home.dart';
 import 'package:meals/screens/meals.dart';
@@ -71,24 +70,8 @@ class _TabScreenState extends ConsumerState<TabScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var meal = ref.watch(mealsProvider);
-    final favMeals = ref.watch(favMealsProvider);
-    final selectedMeals = ref.watch(filterProvider);
-    final availableMeals = meal.where((meal) {
-      if (selectedMeals[Filter.Gluten]! && !meal.isGlutenFree) {
-        return false;
-      }
-      if (selectedMeals[Filter.Lactose]! && !meal.isLactoseFree) {
-        return false;
-      }
-      if (selectedMeals[Filter.Vegan]! && !meal.isVegan) {
-        return false;
-      }
-      if (selectedMeals[Filter.Vegetarian]! && !meal.isVegetarian) {
-        return false;
-      }
-      return true;
-    }).toList();
+
+    final availableMeals = ref.watch(filteredMealsProvider);
     Widget content = Home(
       availableMeals: availableMeals,
       // onUpdateFavourites: onUpdateFavourites,

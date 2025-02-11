@@ -14,6 +14,8 @@ class MealDetailsScreen extends ConsumerWidget {
   // void Function(Meal meal) onUpdateFavorites;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final favMeals = ref.watch(favMealsProvider);
+    final isFav = favMeals.contains(meal);
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
@@ -35,7 +37,7 @@ class MealDetailsScreen extends ConsumerWidget {
               // onUpdateFavorites(meal);
             },
             icon: Icon(
-              Icons.favorite_outline,
+              isFav ? Icons.favorite : Icons.favorite_outline,
             ),
           )
         ],
