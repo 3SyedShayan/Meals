@@ -1,23 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/providers/favourites_provider.dart';
 import 'package:transparent_image/transparent_image.dart';
 
-class MealDetailsScreen extends StatelessWidget {
-  MealDetailsScreen(
-      {super.key, required this.meal, required this.onUpdateFavorites});
+class MealDetailsScreen extends ConsumerWidget {
+  MealDetailsScreen({
+    super.key,
+    required this.meal,
+    // required this.onUpdateFavorites
+  });
   Meal meal;
-  void Function(Meal meal) onUpdateFavorites;
+  // void Function(Meal meal) onUpdateFavorites;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
-              onPressed: () {
-                onUpdateFavorites(meal);
-              },
-              icon: Icon(Icons.favorite_outline))
+            onPressed: () {
+              final wasAdded = ref
+                  .read(favMealsProvider.notifier)
+                  .toggleMealOnFavStatus(meal);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(wasAdded
+                      ? "Meal Added as a Favourite"
+                      : "Meal Removed from Favourite"),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+              // onUpdateFavorites(meal);
+            },
+            icon: Icon(
+              Icons.favorite_outline,
+            ),
+          )
         ],
       ),
       body: Center(

@@ -6,8 +6,11 @@ import 'package:meals/screens/meals.dart';
 import 'package:meals/widgets/category_grid_item.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key, required this.onUpdateFavourites, required this.availableMeals});
-  void Function(Meal meal) onUpdateFavourites;
+  Home({super.key,
+  //  required this.onUpdateFavourites,
+    required this.availableMeals});
+
+  // void Function(Meal meal) onUpdateFavourites;
   List<Meal> availableMeals;
   void onSelectCategory(BuildContext context, Category category) {
     final filteredMeals = availableMeals
@@ -19,7 +22,7 @@ class Home extends StatelessWidget {
         builder: (context) => Meals(
           title: category.title,
           meals: filteredMeals,
-          onUpdateFavorites: onUpdateFavourites,
+          // onUpdateFavorites: onUpdateFavourites,
         ),
       ),
     );

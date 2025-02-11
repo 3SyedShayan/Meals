@@ -3,13 +3,14 @@ import 'package:meals/models/meal.dart';
 import 'package:meals/widgets/meal_item.dart';
 
 class Meals extends StatelessWidget {
-  Meals(
-      {super.key,
-      this.title,
-      required this.meals,
-      required this.onUpdateFavorites});
+  Meals({
+    super.key,
+    this.title,
+    required this.meals,
+    // required this.onUpdateFavorites
+  });
   String? title;
-  void Function(Meal meal) onUpdateFavorites;
+  // void Function(Meal meal) onUpdateFavorites;
   List<Meal> meals;
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class Meals extends StatelessWidget {
       itemCount: meals.length,
       itemBuilder: (context, index) => MealItem(
         meal: meals[index],
-        onUpdateFav: onUpdateFavorites,
+        // onUpdateFav: onUpdateFavorites,
       ),
     );
 
