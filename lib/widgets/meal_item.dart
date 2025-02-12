@@ -6,10 +6,8 @@ import 'package:transparent_image/transparent_image.dart';
 
 class MealItem extends StatelessWidget {
   MealItem({super.key, required this.meal, 
-  // required this.onUpdateFav,
   });
   Meal meal;
-  // void Function(Meal meal) onUpdateFav;
   String complexityText() {
     return meal.complexity.name[0].toUpperCase() +
         meal.complexity.name.substring(1).toLowerCase();
@@ -37,7 +35,6 @@ class MealItem extends StatelessWidget {
               builder: (context) {
                 return MealDetailsScreen(
                   meal: meal,
-                  // onUpdateFavorites: onUpdateFav,
                 );
               },
             ),

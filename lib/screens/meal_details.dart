@@ -8,10 +8,8 @@ class MealDetailsScreen extends ConsumerWidget {
   MealDetailsScreen({
     super.key,
     required this.meal,
-    // required this.onUpdateFavorites
   });
   Meal meal;
-  // void Function(Meal meal) onUpdateFavorites;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final favMeals = ref.watch(favMealsProvider);
@@ -34,7 +32,6 @@ class MealDetailsScreen extends ConsumerWidget {
                   duration: const Duration(seconds: 2),
                 ),
               );
-              // onUpdateFavorites(meal);
             },
             icon: Icon(
               isFav ? Icons.favorite : Icons.favorite_outline,

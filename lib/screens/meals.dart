@@ -7,10 +7,8 @@ class Meals extends StatelessWidget {
     super.key,
     this.title,
     required this.meals,
-    // required this.onUpdateFavorites
   });
   String? title;
-  // void Function(Meal meal) onUpdateFavorites;
   List<Meal> meals;
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,6 @@ class Meals extends StatelessWidget {
       itemCount: meals.length,
       itemBuilder: (context, index) => MealItem(
         meal: meals[index],
-        // onUpdateFav: onUpdateFavorites,
       ),
     );
 

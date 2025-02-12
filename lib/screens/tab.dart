@@ -22,27 +22,9 @@ const kInitialFilters = {
 };
 
 class _TabScreenState extends ConsumerState<TabScreen> {
-  // List<Meal> favMeals = [];
   Map<Filter, bool> selectedMeals = kInitialFilters;
   int currentIndex = 0;
-  // void showSnacks(String message) {
-
-  // }
-
-  // void onUpdateFavourites(Meal meal) {
-  //   if (favMeals.contains(meal)) {
-  //     setState(() {
-  //       favMeals.remove(meal);
-  //       showSnacks('Removed from favorites');
-  //     });
-  //   } else {
-  //     setState(() {
-  //       favMeals.add(meal);
-  //       showSnacks('Added to favorites');
-  //     });
-  //   }
-  // }
-
+ 
   void onDrawerUpdate(String drawerText) async {
     Navigator.of(context).pop();
     if (drawerText == "filters") {
@@ -74,12 +56,10 @@ class _TabScreenState extends ConsumerState<TabScreen> {
     final availableMeals = ref.watch(filteredMealsProvider);
     Widget content = Home(
       availableMeals: availableMeals,
-      // onUpdateFavourites: onUpdateFavourites,
     );
     if (currentIndex == 1) {
       content = Meals(
         meals: ref.watch(favMealsProvider),
-        // onUpdateFavorites: onUpdateFavourites,
       );
     }
     return Scaffold(
