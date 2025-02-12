@@ -9,7 +9,7 @@ class FiltersScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final readValues = ref.read(filterProvider);
+    final readValues = ref.watch(filterProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text("Filters"),
@@ -22,6 +22,7 @@ class FiltersScreen extends ConsumerWidget {
               ref
                   .read(filterProvider.notifier)
                   .setFilter(Filter.Gluten, onChanged);
+              print("onChanged: $onChanged");
             },
             title: Text("Gluten-Free"),
             subtitle: Text(
