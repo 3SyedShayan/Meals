@@ -21,7 +21,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
     _animationController = AnimationController(
         vsync: this,
-        duration: Duration(milliseconds: 400),
+        duration: Duration(milliseconds: 1200),
         lowerBound: 0,
         upperBound: 1);
     _animationController.forward();
@@ -35,7 +35,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   void onSelectCategory(BuildContext context, Category category) {
     final filteredMeals = widget.availableMeals
-        .where((meal) => meal.categories.contains(category.id))
+        .where(
+          (meal) => meal.categories.contains(
+            category.id,
+          ),
+        )
         .toList();
     Navigator.push(
       context,
@@ -70,9 +74,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             )
         ],
       ),
-      builder: (context, child) => Padding(
-        padding: EdgeInsets.only(top: 100 - _animationController.value * 100),
+      builder: (context, child) => SlideTransition(
         child: child,
+        position: Tween(
+          begin: Offset(0, 0.3),
+          end: Offset(0, 0.0),
+        ).animate(
+          CurvedAnimation(
+            parent: _animationController,
+            curve: Curves.easeInOut,
+          ),
+        ),
       ),
     );
   }
