@@ -63,39 +63,45 @@ class MealDetailsScreen extends ConsumerWidget {
                   width: double.infinity,
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 14),
               Text(
                 'Ingredients',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                meal.ingredients.join('\n'),
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                ),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               SizedBox(height: 10),
+              for (final ingredient in meal.ingredients)
+                Text(
+                  ingredient,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: Theme.of(context).colorScheme.onBackground,
+                      ),
+                ),
+              const SizedBox(height: 24),
               Text(
                 'Steps',
-                style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
-              Text(
-                meal.steps.join('\n'),
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
+              const SizedBox(height: 14),
+              for (final step in meal.steps)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  child: Text(
+                    step,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
             ],
           ),
         ),

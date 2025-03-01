@@ -4,7 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:meals/screens/tab.dart';
 
 void main() {
-  runApp(ProviderScope(child: MainApp()));
+  runApp(
+    ProviderScope(
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

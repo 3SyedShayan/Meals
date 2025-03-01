@@ -40,7 +40,7 @@ final filteredMealsProvider = Provider((ref) {
     }
     if (selectedMeals[Filter.Vegan]! && !meal.isVegan) {
       return false;
-    }
+    } 
     if (selectedMeals[Filter.Vegetarian]! && !meal.isVegetarian) {
       return false;
     }
