@@ -51,7 +51,7 @@ class MealDetailsScreen extends ConsumerWidget {
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Hero(
                 tag: meal.id,
@@ -65,7 +65,7 @@ class MealDetailsScreen extends ConsumerWidget {
               ),
               SizedBox(height: 14),
               Text(
-                'Ingredients',
+                '     Ingredients',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -74,14 +74,16 @@ class MealDetailsScreen extends ConsumerWidget {
               SizedBox(height: 10),
               for (final ingredient in meal.ingredients)
                 Text(
-                  ingredient,
+                  "         • $ingredient",
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 14,
                         color: Theme.of(context).colorScheme.onBackground,
                       ),
+                  textAlign: TextAlign.left,
                 ),
               const SizedBox(height: 24),
               Text(
-                'Steps',
+                '     Steps',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(
                       color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
@@ -91,12 +93,11 @@ class MealDetailsScreen extends ConsumerWidget {
               for (final step in meal.steps)
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
+                    horizontal: 15,
+                    vertical: 1,
                   ),
                   child: Text(
-                    step,
-                    textAlign: TextAlign.center,
+                    "  ●  $step",
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: Theme.of(context).colorScheme.onBackground,
                         ),
